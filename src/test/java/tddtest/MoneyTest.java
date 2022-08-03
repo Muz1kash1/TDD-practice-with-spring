@@ -1,8 +1,8 @@
 package tddtest;
 
 import com.example.bootest.domailn.model.Currency;
+import com.example.bootest.domailn.model.ExchangePair;
 import com.example.bootest.domailn.model.Money;
-import com.example.bootest.domailn.model.Wallet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MoneyTest {
-  private final Map<Wallet.ExchangePair, Double> currencyBoard = new HashMap<>();
+  private final Map<ExchangePair, Double> currencyBoard = new HashMap<>();
 
   @DisplayName("dollar should Not Return Null")
   @Test
@@ -125,8 +125,8 @@ class MoneyTest {
   @DisplayName("plus 2 Chf Plus 4 Usd And Rate 2 to 1 should Be 8 Usd")
   @Test
   public void plus_2ChfPlus4UsdAndRate2to1_shouldBe_8Usd() {
-    currencyBoard.put(new Wallet.ExchangePair(Currency.EUR, Currency.USD), 1.2);
-    currencyBoard.put(new Wallet.ExchangePair(Currency.CHF, Currency.USD), 2.0);
+    currencyBoard.put(new ExchangePair(Currency.EUR, Currency.USD), 1.2);
+    currencyBoard.put(new ExchangePair(Currency.CHF, Currency.USD), 2.0);
     assertThat(Money.franc(2.0).plus(Money.dollar(4.0)).asCurrency(currencyBoard, Currency.USD))
         .isEqualTo(Money.dollar(8));
   }

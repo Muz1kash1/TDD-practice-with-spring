@@ -1,6 +1,5 @@
 package com.example.bootest.domailn.model;
 
-
 public class Money {
   protected final Currency currency;
 

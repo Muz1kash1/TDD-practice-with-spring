@@ -1,6 +1,7 @@
 package tddtest;
 
 import com.example.bootest.domailn.model.Currency;
+import com.example.bootest.domailn.model.ExchangePair;
 import com.example.bootest.domailn.model.Money;
 import com.example.bootest.domailn.model.Wallet;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +13,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WalletTest {
-  private Map<Wallet.ExchangePair, Double> currencyBoard = new HashMap<>();
+  private Map<ExchangePair, Double> currencyBoard = new HashMap<>();
 
   @DisplayName("wallet with 1 Dollar should Be Equal Wallet With 1 Dollar")
   @Test
@@ -64,8 +65,8 @@ class WalletTest {
   @DisplayName("Wallet with 2 Euro And 3 Chf and 4 USD as Currency USD should Be Equal 20 USD")
   @Test
   public void Wallet_with2EuroAnd3ChfAnd4Dollar_asCurrencyUSD_shouldBeEqual20Dollar() {
-    currencyBoard.put(new Wallet.ExchangePair(Currency.EUR, Currency.USD), 2.0);
-    currencyBoard.put(new Wallet.ExchangePair(Currency.CHF, Currency.USD), 4.0);
+    currencyBoard.put(new ExchangePair(Currency.EUR, Currency.USD), 2.0);
+    currencyBoard.put(new ExchangePair(Currency.CHF, Currency.USD), 4.0);
 
     assertThat(
             Money.euro(2.0)
@@ -78,8 +79,8 @@ class WalletTest {
   @DisplayName("Wallet with 3 Euro And 5Chf as Currency EUR should Not Be Equal 20 Euro")
   @Test
   public void Wallet_with3EuroAnd5ChfAnd4Dollar_asCurrencyEUR_shouldNotBeEqual20Euro() {
-    currencyBoard.put(new Wallet.ExchangePair(Currency.USD, Currency.EUR), 0.5);
-    currencyBoard.put(new Wallet.ExchangePair(Currency.CHF, Currency.EUR), 2.0);
+    currencyBoard.put(new ExchangePair(Currency.USD, Currency.EUR), 0.5);
+    currencyBoard.put(new ExchangePair(Currency.CHF, Currency.EUR), 2.0);
 
     assertThat(
             Money.euro(3.0)
@@ -92,8 +93,8 @@ class WalletTest {
   @DisplayName("Wallet with 3 Euro And 5Chf should Be Equal Wallet with 3Euro And 1Chf Plus 4Chf")
   @Test
   public void Wallet_with3EuroAnd5Chf_shouldBeEqual_Wallet_with3EuroAnd1ChfPlus4Chf() {
-    currencyBoard.put(new Wallet.ExchangePair(Currency.USD, Currency.EUR), 0.5);
-    currencyBoard.put(new Wallet.ExchangePair(Currency.CHF, Currency.EUR), 2.0);
+    currencyBoard.put(new ExchangePair(Currency.USD, Currency.EUR), 0.5);
+    currencyBoard.put(new ExchangePair(Currency.CHF, Currency.EUR), 2.0);
     assertThat(
         (new Wallet(Money.euro(3), Money.franc(5))
             .equals(
