@@ -34,4 +34,8 @@ public class CurrencyBoardDao {
     }
     return exchangesForThisCurrency;
   }
+
+  public Currency getCurrencyByName(String name) {
+    return currencyBoard.getCurrencyNames().get(name);
+  }
 }

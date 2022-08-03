@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Wallet {
-  @Autowired private final List<Money> moneyList;
+  private final List<Money> moneyList;
 
   public Wallet(Money... money) {
     moneyList = List.of(money);

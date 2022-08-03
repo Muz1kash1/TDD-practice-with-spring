@@ -15,5 +15,13 @@ public class CurrencyBoard {
           new ExchangePair(Currency.USD, Currency.EUR),
           0.5,
           new ExchangePair(Currency.CHF, Currency.EUR),
-          2.0);
+          2.0,
+          new ExchangePair(Currency.EUR, Currency.CHF),
+          0.5);
+
+  private final Map<String, Currency> currencyNames =
+      Map.of(
+          "Euro", Currency.EUR,
+          "Franc", Currency.CHF,
+          "Dollar", Currency.USD);
 }

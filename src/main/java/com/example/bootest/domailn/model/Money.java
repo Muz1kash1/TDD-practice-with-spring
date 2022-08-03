@@ -10,6 +10,11 @@ public class Money {
     this.currency = currency;
   }
 
+  public static Money customCurrency(double amount, Currency customCurrency){
+    Money custom = new Money(amount,customCurrency);
+    return custom;
+  }
+
   /**
    * возвращает новый доллар
    *

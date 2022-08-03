@@ -1,6 +1,7 @@
 package com.example.bootest.service;
 
 import com.example.bootest.domailn.model.Currency;
+import com.example.bootest.domailn.model.Money;
 import com.example.bootest.repository.CurrencyBoardDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,16 @@ public class CurrencyBoardService {
   @Autowired
   public CurrencyBoardService(CurrencyBoardDao currencyBoardDao) {
     this.currencyBoardDao = currencyBoardDao;
+  }
+
+  public String currencyAddition(
+      String firstCurrencyName,
+      double firstCurrencyAmount,
+      String secondCurrencyName,
+      double secondCurrencyAmount) {
+    return Money.customCurrency(firstCurrencyAmount, getCourencyByName(firstCurrencyName))
+        .plus(Money.customCurrency(secondCurrencyAmount, getCourencyByName(secondCurrencyName)))
+        .toString();
   }
 
   public String getBoard() {
@@ -28,9 +39,16 @@ public class CurrencyBoardService {
 
   public String getCoursesForCurrency(Currency currency) {
     String[] currencyCourses = {""};
-    currencyBoardDao.getExchangeCoursesOf(currency).forEach((key, value) -> {
-        currencyCourses[0] += (key.toString() + " " + value.toString() + "\n");
-    });
+    currencyBoardDao
+        .getExchangeCoursesOf(currency)
+        .forEach(
+            (key, value) -> {
+              currencyCourses[0] += (key.toString() + " " + value.toString() + "\n");
+            });
     return currencyCourses[0];
+  }
+
+  public Currency getCourencyByName(String name) {
+    return currencyBoardDao.getCurrencyByName(name);
   }
 }
