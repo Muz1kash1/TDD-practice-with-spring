@@ -54,8 +54,7 @@ public class CurrencyBoardDao {
     return currencyBoard.insertCurrencyExchangePair(firstCurrency, secondCurrency, exchangeCourse);
   }
 
-  public Map.Entry<ExchangePair, Double> deleteCurrencyPairFromCB(
-      Currency firstCurrency, Currency secondCurrency) {
-    return currencyBoard.deleteCurrencyExchaingePair(firstCurrency, secondCurrency);
+  public void deleteCurrencyPairFromCB(Currency firstCurrency, Currency secondCurrency) {
+    currencyBoard.deleteCurrencyExchaingePair(firstCurrency, secondCurrency);
   }
 }

@@ -58,20 +58,22 @@ public class CurrencyBoard {
     return inserted.get();
   }
 
-  public Map.Entry<ExchangePair, Double> deleteCurrencyExchaingePair(
-      Currency firstCurrency, Currency secondCurrency) {
-    AtomicReference<Map.Entry<ExchangePair, Double>> deleted = new AtomicReference<>();
-    ExchangePair pairToDelete =
-        new ExchangePair(firstCurrency, secondCurrency);
-    currencyBoard
-        .entrySet()
-        .forEach(
-            (entry -> {
-              if (entry.getKey().equals(pairToDelete)) {
-                deleted.set(entry);
-                currencyBoard.remove(pairToDelete);
-              }
-            }));
-    return deleted.get();
+  public void deleteCurrencyExchaingePair(Currency firstCurrency, Currency secondCurrency) {
+
+    ExchangePair pairToDelete = new ExchangePair(firstCurrency, secondCurrency);
+    // Не осуждайте стажера за костыль
+    try {
+      currencyBoard
+          .entrySet()
+          .forEach(
+              (entry -> {
+                System.out.println(entry.getKey());
+                if (entry.getKey().equals(pairToDelete)) {
+                  currencyBoard.remove(pairToDelete);
+                }
+              }));
+    } catch (RuntimeException e) {
+      return;
+    }
   }
 }

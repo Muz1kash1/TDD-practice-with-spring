@@ -64,7 +64,7 @@ public class SomeController {
             firstCurrencyName, Double.parseDouble(firstCurrencyAmount), secondCurrencyName),
         HttpStatus.OK);
   }
-//TODO: Сделать так чтобы он не выкидывал екзеп
+//TODO: Сделать так чтобы он не выкидывал екзеп без костыля
   @DeleteMapping(
       value = "/board",
       consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE},
