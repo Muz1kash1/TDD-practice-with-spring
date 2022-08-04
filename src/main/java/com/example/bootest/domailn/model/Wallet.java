@@ -69,6 +69,7 @@ public class Wallet {
       case USD -> Money.dollar(amount);
       case CHF -> Money.franc(amount);
       case EUR -> Money.euro(amount);
+      default -> Money.customCurrency(amount,currency);
     };
   }
 

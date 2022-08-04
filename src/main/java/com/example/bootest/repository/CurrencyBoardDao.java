@@ -25,17 +25,37 @@ public class CurrencyBoardDao {
     return currencyBoard.getCurrencyBoard();
   }
 
-  public Map<ExchangePair, Double> getExchangeCoursesOf(Currency currency) {
-    Map<ExchangePair, Double> exchangesForThisCurrency = new HashMap<>();
-    for (Map.Entry<ExchangePair, Double> entry : currencyBoard.getCurrencyBoard().entrySet()) {
-      if (entry.getKey().getFirstCurrency().equals(currency)) {
-        exchangesForThisCurrency.put(entry.getKey(), entry.getValue());
-      }
+  public Map<String, Double> getExchangeCoursesOf(String currency) {
+    Map<String, Double> exchangesForThisCurrency = new HashMap<>();
+    for (Map.Entry<String, Double> entry : currencyBoard.getCoursesFromCentralBank().entrySet()) {
+      exchangesForThisCurrency.put(
+          entry.getKey(),
+          entry.getValue() / currencyBoard.getCoursesFromCentralBank().get(currency));
     }
+
     return exchangesForThisCurrency;
   }
 
   public Currency getCurrencyByName(String name) {
-    return currencyBoard.getCurrencyNames().get(name);
+    return Currency.valueOf(name);
+  }
+
+  public Double getCourseByValutes(String firstValute, String secondValute) {
+    return currencyBoard.getCoursesFromCentralBank().get(firstValute)
+        / currencyBoard.getCoursesFromCentralBank().get(secondValute);
+  }
+
+  public Map<String, Double> getCourencyBoardFromCB() {
+    return currencyBoard.getCoursesFromCentralBank();
+  }
+
+  public Map.Entry<ExchangePair, Double> createCourencyPairInCB(
+      Currency firstCurrency, Currency secondCurrency, Double exchangeCourse) {
+    return currencyBoard.insertCurrencyExchangePair(firstCurrency, secondCurrency, exchangeCourse);
+  }
+
+  public Map.Entry<ExchangePair, Double> deleteCurrencyPairFromCB(
+      Currency firstCurrency, Currency secondCurrency) {
+    return currencyBoard.deleteCurrencyExchaingePair(firstCurrency, secondCurrency);
   }
 }
