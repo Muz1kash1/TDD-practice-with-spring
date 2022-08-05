@@ -1,4 +1,4 @@
-package com.example.bootest.domailn.model;
+package com.example.bootest;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class CentralBankConnectionReader {
+public class CentralBankXMLParser {
   public static Map<String, Double> read() throws Exception {
     Map<String, Double> readedBoardFromCentralBak = new HashMap<>();
     DateTimeFormatter dateString = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -46,7 +46,6 @@ public class CentralBankConnectionReader {
         readedBoardFromCentralBak.put(charcode, formatedValue / Double.parseDouble(nominal));
       }
     }
-
     return readedBoardFromCentralBak;
   }
 }

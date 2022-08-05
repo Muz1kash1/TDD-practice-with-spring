@@ -8,5 +8,5 @@ import lombok.Data;
 public class ExchangeDTO {
   private String firstCurrency;
   private String secondCurrency;
-  private Double exchangeCourse;
+  private Double amount;
 }
