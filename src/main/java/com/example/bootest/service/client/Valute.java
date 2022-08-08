@@ -14,7 +14,7 @@ public class Valute {
   private String charCode;
 
   @JsonProperty("Nominal")
-  private int nominal;
+  private double nominal;
 
   @JsonProperty("Value")
   private double value;

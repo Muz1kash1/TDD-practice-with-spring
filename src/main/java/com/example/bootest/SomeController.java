@@ -2,15 +2,20 @@ package com.example.bootest;
 
 import com.example.bootest.domailn.model.DTOs.ExchangeDTO;
 import com.example.bootest.domailn.model.DTOs.ExchangeDTOMapper;
+import com.example.bootest.repository.RatesRepository;
 import com.example.bootest.service.BankService;
+import com.example.bootest.service.client.Valute;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
 
 @AllArgsConstructor
 @Slf4j
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SomeController {
   //  @Autowired private final CurrencyBoardService currencyBoardService;
   @Autowired private final BankService bankService;
+  @Autowired private final RatesRepository repository;
 
   //  @GetMapping("/board")
   //  public ResponseEntity getCoursesBoard() {
@@ -64,6 +70,15 @@ public class SomeController {
             firstCurrencyName, secondCurrencyName, Double.parseDouble(firstCurrencyAmount));
     return ResponseEntity.ok().body(bankService.convert(exchangeDTO));
   }
+
+  @PostMapping("/addnew")
+  public ResponseEntity<Valute> putNewValute(
+      @RequestParam String charcode, @RequestParam String amount, @RequestParam String value) {
+    repository.putValute(charcode, Double.parseDouble(amount), Double.parseDouble(value));
+    return ResponseEntity.created(URI.create(String.format("/courses/%s", charcode)))
+        .body(repository.getRateBank().getValute().get(charcode));
+  }
+
   //  @DeleteMapping(
   //      value = "/board",
   //      consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE},

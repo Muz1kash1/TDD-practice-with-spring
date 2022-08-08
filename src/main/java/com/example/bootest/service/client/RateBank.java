@@ -11,4 +11,8 @@ import java.util.Map;
 public class RateBank {
   @JsonProperty("Valute")
   private Map<String, Valute> valute;
+
+  public RateBank(Map<String, Valute> valute) {
+    this.valute = valute;
+  }
 }
